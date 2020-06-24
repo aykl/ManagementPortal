@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { Subject } from '../../shared/subject';
 
 import { OAuthClient } from './oauth-client.model';

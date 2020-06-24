@@ -1,5 +1,6 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 
 @Injectable()
@@ -12,7 +13,7 @@ export class JhiHealthService {
     }
 
     checkHealth(): Observable<any> {
-        return this.http.get('management/health', { observe: 'response'}).map((res: HttpResponse<any>) => res.body);
+        return this.http.get('management/health', { observe: 'response'}).pipe(map((res: HttpResponse<any>) => res.body));
     }
 
     transformHealthData(data): any {

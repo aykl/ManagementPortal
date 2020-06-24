@@ -1,9 +1,10 @@
+
+import {of as observableOf,  Observable } from 'rxjs';
 import { ComponentFixture, TestBed, async, inject } from '@angular/core/testing';
 import { OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
-import { DateUtils, DataUtils, EventManager } from 'ng-jhipster';
+import { JhiDateUtils, JhiDataUtils, JhiEventManager } from 'ng-jhipster';
 import { ManagementPortalTestModule } from '../../../test.module';
 import { MockActivatedRoute } from '../../../helpers/mock-route.service';
 import {SubjectService} from '../../../../../../main/webapp/app/shared/subject/subject.service';
@@ -22,15 +23,15 @@ describe('Component Tests', () => {
                 imports: [ManagementPortalTestModule],
                 declarations: [SubjectDetailComponent],
                 providers: [
-                    DateUtils,
-                    DataUtils,
+                    JhiDateUtils,
+                    JhiDataUtils,
                     DatePipe,
                     {
                         provide: ActivatedRoute,
                         useValue: new MockActivatedRoute({login: 'test'})
                     },
                     SubjectService,
-                    EventManager
+                    JhiEventManager
                 ]
             }).overrideTemplate(SubjectDetailComponent, '').compileComponents();
         }));
@@ -45,7 +46,7 @@ describe('Component Tests', () => {
             it('Should call load all on init', () => {
             // GIVEN
 
-            spyOn(service, 'find').and.returnValue(Observable.of(new Subject(10, 'test')));
+            spyOn(service, 'find').and.returnValue(observableOf(new Subject(10, 'test')));
 
             // WHEN
             comp.ngOnInit();

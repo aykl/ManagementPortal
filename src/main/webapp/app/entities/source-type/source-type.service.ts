@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { SourceType } from './source-type.model';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { createRequestOption } from '../../shared/model/request.utils';

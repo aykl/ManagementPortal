@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { PaginationUtil } from 'ng-jhipster';
+import { JhiPaginationUtil } from 'ng-jhipster';
 
 @Injectable()
 export class ResolvePagingParams implements Resolve<any> {
 
-    constructor(private paginationUtil: PaginationUtil) {
+    constructor(private paginationUtil: JhiPaginationUtil) {
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {

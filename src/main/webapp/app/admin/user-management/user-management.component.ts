@@ -1,12 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-    AlertService,
-    EventManager,
-    JhiLanguageService,
-    PaginationUtil,
-    ParseLinks,
-} from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager, JhiPaginationUtil, JhiParseLinks } from 'ng-jhipster';
 import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 
 import { ITEMS_PER_PAGE, Principal, User, UserService } from '../../shared';
@@ -37,13 +31,12 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
     byEmail: string;
 
     constructor(
-            private jhiLanguageService: JhiLanguageService,
             private userService: UserService,
-            private parseLinks: ParseLinks,
-            private alertService: AlertService,
+            private parseLinks: JhiParseLinks,
+            private alertService: JhiAlertService,
             private principal: Principal,
-            private eventManager: EventManager,
-            private paginationUtil: PaginationUtil,
+            private eventManager: JhiEventManager,
+            private paginationUtil: JhiPaginationUtil,
             private paginationConfig: PaginationConfig,
             private activatedRoute: ActivatedRoute,
             private router: Router,
@@ -55,7 +48,6 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
             this.reverse = data['pagingParams'].ascending;
             this.predicate = data['pagingParams'].predicate;
         });
-        this.jhiLanguageService.setLocations(['user-management']);
     }
 
     ngOnInit() {

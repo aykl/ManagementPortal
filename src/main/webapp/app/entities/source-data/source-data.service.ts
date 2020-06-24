@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 import { SourceData } from './source-data.model';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { createRequestOption } from '../../shared/model/request.utils';
+
 @Injectable()
 export class SourceDataService {
 

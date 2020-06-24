@@ -8,8 +8,8 @@ import {
     SimpleChanges,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService, EventManager, JhiLanguageService, ParseLinks } from 'ng-jhipster';
-import { Subscription } from 'rxjs/Rx';
+import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
+import { Subscription } from 'rxjs';
 import { ITEMS_PER_PAGE, Principal, Project } from '..';
 
 import { Subject } from './subject.model';
@@ -38,12 +38,11 @@ export class SubjectComponent implements OnInit, OnDestroy, OnChanges {
     @Input() isProjectSpecific: boolean;
 
     constructor(
-            private jhiLanguageService: JhiLanguageService,
             private subjectService: SubjectService,
-            private alertService: AlertService,
-            private eventManager: EventManager,
+            private alertService: JhiAlertService,
+            private eventManager: JhiEventManager,
             private principal: Principal,
-            private parseLinks: ParseLinks,
+            private parseLinks: JhiParseLinks,
             private activatedRoute: ActivatedRoute,
             private router: Router,
     ) {
@@ -62,7 +61,6 @@ export class SubjectComponent implements OnInit, OnDestroy, OnChanges {
                 this.reverse = true;
             }
         });
-        this.jhiLanguageService.addLocation('subject');
     }
 
     loadSubjects() {

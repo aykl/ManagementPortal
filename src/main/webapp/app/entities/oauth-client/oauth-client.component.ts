@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AlertService, EventManager, JhiLanguageService } from 'ng-jhipster';
-import { Subscription } from 'rxjs/Rx';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
+import { Subscription } from 'rxjs';
 import { Principal } from '../../shared';
 
 import { OAuthClient } from './oauth-client.model';
@@ -25,14 +25,11 @@ export class OAuthClientComponent implements OnInit, OnDestroy {
     };
 
     constructor(
-            private jhiLanguageService: JhiLanguageService,
             private oauthClientService: OAuthClientService,
-            private alertService: AlertService,
-            private eventManager: EventManager,
+            private alertService: JhiAlertService,
+            private eventManager: JhiEventManager,
             private principal: Principal,
-    ) {
-        this.jhiLanguageService.setLocations(['oauthClient']);
-    }
+    ) {}
 
     loadAll() {
         this.oauthClientService.query().subscribe(

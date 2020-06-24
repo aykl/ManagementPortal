@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { AlertService, EventManager, JhiLanguageService } from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
 import { SourceType, SourceTypeService } from '../source-type';
 import { SourceDataPopupService } from './source-data-popup.service';
 
@@ -24,15 +24,11 @@ export class SourceDataDialogComponent implements OnInit {
 
     constructor(
             public activeModal: NgbActiveModal,
-            private jhiLanguageService: JhiLanguageService,
-            private alertService: AlertService,
+            private alertService: JhiAlertService,
             private sourceDataService: SourceDataService,
             private sourceTypeService: SourceTypeService,
-            private eventManager: EventManager,
-    ) {
-        this.jhiLanguageService.addLocation('sourceData');
-        this.jhiLanguageService.addLocation('processingState');
-    }
+            private eventManager: JhiEventManager,
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;

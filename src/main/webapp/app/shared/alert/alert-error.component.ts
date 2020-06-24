@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
-import { AlertService, EventManager } from 'ng-jhipster';
-import { TranslateService } from 'ng2-translate';
-import { Subscription } from 'rxjs/Rx';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'jhi-alert-error',
@@ -17,7 +17,11 @@ export class JhiAlertErrorComponent implements OnDestroy {
     alerts: any[];
     cleanHttpErrorListener: Subscription;
 
-    constructor(private alertService: AlertService, private eventManager: EventManager, private translateService: TranslateService) {
+    constructor(
+            private alertService: JhiAlertService,
+            private eventManager: JhiEventManager,
+            private translateService: TranslateService
+    ) {
         this.alerts = [];
 
         this.cleanHttpErrorListener = eventManager.subscribe('managementPortalApp.httpError', (response) => {

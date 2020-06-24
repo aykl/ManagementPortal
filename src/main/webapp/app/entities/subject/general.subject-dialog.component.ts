@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { AlertService, EventManager, JhiLanguageService } from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
 import { MinimalSource } from '../../shared/source';
 import { Subject, SubjectService } from '../../shared/subject';
 
@@ -24,13 +24,13 @@ export class GeneralSubjectDialogComponent implements OnInit {
 
     attributeComponentEventPrefix: 'subjectAttributes';
 
-    constructor(public activeModal: NgbActiveModal,
-                private jhiLanguageService: JhiLanguageService,
-                private alertService: AlertService,
-                private subjectService: SubjectService,
-                private projectService: ProjectService,
-                private eventManager: EventManager) {
-        this.jhiLanguageService.addLocation('subject');
+    constructor(
+            public activeModal: NgbActiveModal,
+            private alertService: JhiAlertService,
+            private subjectService: SubjectService,
+            private projectService: ProjectService,
+            private eventManager: JhiEventManager
+    ) {
         this.isSaving = false;
         this.authorities = ['ROLE_USER', 'ROLE_SYS_ADMIN'];
         this.options = ['Human-readable-identifier'];

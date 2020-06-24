@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { AlertService, EventManager, JhiLanguageService } from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
 import { SourceType, SourceTypeService } from '../source-type';
 import { ProjectPopupService } from './project-popup.service';
 
@@ -26,14 +26,11 @@ export class ProjectDialogComponent implements OnInit {
 
     constructor(
             public activeModal: NgbActiveModal,
-            private jhiLanguageService: JhiLanguageService,
-            private alertService: AlertService,
+            private alertService: JhiAlertService,
             private projectService: ProjectService,
             private sourceTypeService: SourceTypeService,
-            private eventManager: EventManager,
+            private eventManager: JhiEventManager,
     ) {
-        this.jhiLanguageService.addLocation('projectStatus');
-        this.jhiLanguageService.addLocation('project');
         this.isSaving = false;
         this.authorities = ['ROLE_USER', 'ROLE_SYS_ADMIN', 'ROLE_PROJECT_ADMIN'];
         this.options = ['Work-package', 'Phase', 'External-project-url', 'External-project-id', 'Privacy-policy-url'];

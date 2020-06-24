@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EventManager, JhiLanguageService } from 'ng-jhipster';
-import { Subscription } from 'rxjs/Rx';
+import { JhiEventManager } from 'ng-jhipster';
+import { Subscription } from 'rxjs';
 import { Source } from '../../shared/source/source.model';
 
 import { Project, ProjectService } from '../../shared';
@@ -26,13 +26,10 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     showProjectAnalysts: boolean;
 
     constructor(
-            private eventManager: EventManager,
-            private jhiLanguageService: JhiLanguageService,
+            private eventManager: JhiEventManager,
             private projectService: ProjectService,
             private route: ActivatedRoute,
-    ) {
-        this.jhiLanguageService.setLocations(['project', 'projectStatus']);
-    }
+    ) {}
 
     ngOnInit() {
         this.subscription = this.route.params.subscribe((params) => {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { AUTH_TOKEN_COOKIE } from '../constants/common.constants';
 
 @Injectable()

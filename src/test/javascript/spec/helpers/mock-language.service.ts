@@ -18,9 +18,5 @@ export class MockLanguageService extends SpyObject {
 
     changeLanguage(languageKey: string) {}
 
-    setLocations(locations: string[]) {}
-
-    addLocation(location: string) {}
-
     reload() {}
 }

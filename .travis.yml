@@ -12,7 +12,7 @@ jdk:
     - oraclejdk8
 
 node_js:
-  - "11.2.0"
+  - 12
 
 cache:
   directories:
@@ -28,7 +28,6 @@ cache:
 
 env:
   global:
-    - NODE_VERSION=11.2.0
     - SPRING_OUTPUT_ANSI_ENABLED=ALWAYS
     - SPRING_JPA_SHOW_SQL=false
 
@@ -36,6 +35,7 @@ env:
 before_install:
 #  - source ./jdk_switcher.sh
 #  - jdk_switcher use oraclejdk8
+  - export NODE_VERSION=$(node --version | cut -c2-)
   - java -version
   - sudo /etc/init.d/mysql stop
   - sudo /etc/init.d/postgresql stop

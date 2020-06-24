@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { AlertService, EventManager, JhiLanguageService } from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
 import { Role } from '../../admin/user-management/role.model';
 import { AuthorityService, Principal, Project, ProjectService } from '../../shared';
 
@@ -24,16 +24,13 @@ export class RoleDialogComponent implements OnInit {
 
     constructor(
             public activeModal: NgbActiveModal,
-            private jhiLanguageService: JhiLanguageService,
-            private alertService: AlertService,
+            private alertService: JhiAlertService,
             private roleService: RoleService,
             private authorityService: AuthorityService,
             private projectService: ProjectService,
             private principal: Principal,
-            private eventManager: EventManager,
-    ) {
-        this.jhiLanguageService.addLocation('role');
-    }
+            private eventManager: JhiEventManager,
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;

@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
-import { EventManager, ParseLinks, JhiLanguageService, AlertService } from 'ng-jhipster';
+import { Subscription } from 'rxjs';
+import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
 import { SourceData } from './source-data.model';
 import { SourceDataService } from './source-data.service';
@@ -26,11 +26,10 @@ export class SourceDataComponent implements OnInit, OnDestroy {
     routeData: any;
     previousPage: any;
     constructor(
-        private jhiLanguageService: JhiLanguageService,
         private sourceDataService: SourceDataService,
-        private alertService: AlertService,
-        private eventManager: EventManager,
-        private parseLinks: ParseLinks,
+        private alertService: JhiAlertService,
+        private eventManager: JhiEventManager,
+        private parseLinks: JhiParseLinks,
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router
@@ -43,7 +42,6 @@ export class SourceDataComponent implements OnInit, OnDestroy {
             this.reverse = data['pagingParams'].ascending;
             this.predicate = data['pagingParams'].predicate;
         });
-        this.jhiLanguageService.setLocations(['sourceData', 'processingState']);
     }
 
     loadAll() {

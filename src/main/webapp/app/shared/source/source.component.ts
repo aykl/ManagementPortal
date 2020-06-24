@@ -8,8 +8,8 @@ import {
     SimpleChanges,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService, EventManager, JhiLanguageService, ParseLinks } from 'ng-jhipster';
-import { Subscription } from 'rxjs/Rx';
+import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
+import { Subscription } from 'rxjs';
 import { ITEMS_PER_PAGE, Principal, Project } from '..';
 
 import { Source } from './source.model';
@@ -39,14 +39,15 @@ export class SourceComponent implements OnInit, OnDestroy, OnChanges {
     routeData: any;
     previousPage: any;
 
-    constructor(private jhiLanguageService: JhiLanguageService,
-                private sourceService: SourceService,
-                private alertService: AlertService,
-                private eventManager: EventManager,
-                private principal: Principal,
-                private parseLinks: ParseLinks,
-                private activatedRoute: ActivatedRoute,
-                private router: Router) {
+    constructor(
+            private sourceService: SourceService,
+            private alertService: JhiAlertService,
+            private eventManager: JhiEventManager,
+            private principal: Principal,
+            private parseLinks: JhiParseLinks,
+            private activatedRoute: ActivatedRoute,
+            private router: Router,
+    ) {
         this.sources = [];
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe((data) => {
@@ -62,7 +63,6 @@ export class SourceComponent implements OnInit, OnDestroy, OnChanges {
                 this.reverse = true;
             }
         });
-        this.jhiLanguageService.addLocation('source');
     }
 
     ngOnInit() {

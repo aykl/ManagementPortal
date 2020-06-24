@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { Renderer, ElementRef } from '@angular/core';
+import { ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoginModalService } from '../../../../../../../main/webapp/app/shared';
 import { ManagementPortalTestModule } from '../../../../test.module';
@@ -13,6 +13,9 @@ describe('Component Tests', () => {
 
         let fixture: ComponentFixture<PasswordResetFinishComponent>;
         let comp: PasswordResetFinishComponent;
+        const passwordRef: ElementRef = {
+            nativeElement: jasmine.createSpyObj('Element', ['focus'])
+        };
 
         beforeEach(() => {
             fixture = TestBed.configureTestingModule({
@@ -29,12 +32,6 @@ describe('Component Tests', () => {
                         useValue: new MockActivatedRoute({'key': 'XYZPDQ'})
                     },
                     {
-                        provide: Renderer,
-                        useValue: {
-                            invokeElementMethod(renderElement: any, methodName: string, args?: any[]) {}
-                        }
-                    },
-                    {
                         provide: ElementRef,
                         useValue: new ElementRef(null)
                     }
@@ -42,6 +39,7 @@ describe('Component Tests', () => {
             }).overrideTemplate(PasswordResetFinishComponent, 'overrideTemplate')
                     .createComponent(PasswordResetFinishComponent);
             comp = fixture.componentInstance;
+            comp.passwordRef = passwordRef;
         });
 
         it('should define its initial state', function() {
@@ -54,19 +52,14 @@ describe('Component Tests', () => {
 
         it('sets focus after the view has been initialized',
             inject([ElementRef], (elementRef: ElementRef) => {
-                const element = fixture.nativeElement;
-                const node = {
-                    focus() {}
+                const localPasswordRef = {
+                    nativeElement: jasmine.createSpyObj('Element', ['focus'])
                 };
-
-                elementRef.nativeElement = element;
-                spyOn(element, 'querySelector').and.returnValue(node);
-                spyOn(node, 'focus');
+                comp.passwordRef = localPasswordRef;
 
                 comp.ngAfterViewInit();
 
-                expect(element.querySelector).toHaveBeenCalledWith('#password');
-                expect(node.focus).toHaveBeenCalled();
+                expect(localPasswordRef.nativeElement.focus).toHaveBeenCalled();
             })
         );
 

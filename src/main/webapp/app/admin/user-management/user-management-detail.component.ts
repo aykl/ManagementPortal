@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { JhiLanguageService } from 'ng-jhipster';
 
 import { User, UserService } from '../../shared';
 
@@ -14,12 +13,9 @@ export class UserMgmtDetailComponent implements OnInit, OnDestroy {
     private subscription: any;
 
     constructor(
-            private jhiLanguageService: JhiLanguageService,
             private userService: UserService,
             private route: ActivatedRoute,
-    ) {
-        this.jhiLanguageService.setLocations(['user-management']);
-    }
+    ) {}
 
     ngOnInit() {
         this.subscription = this.route.params.subscribe((params) => {

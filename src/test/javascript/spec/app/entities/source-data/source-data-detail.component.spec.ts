@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed, async, inject } from '@angular/core/testing';
-import { OnInit } from '@angular/core';
+
+import {of as observableOf } from 'rxjs';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
-import { DateUtils, DataUtils, EventManager } from 'ng-jhipster';
+import { JhiDateUtils, JhiDataUtils, JhiEventManager } from 'ng-jhipster';
 import { ManagementPortalTestModule } from '../../../test.module';
 import { MockActivatedRoute } from '../../../helpers/mock-route.service';
 import { SourceDataDetailComponent } from '../../../../../../main/webapp/app/entities/source-data/source-data-detail.component';
@@ -22,15 +22,15 @@ describe('Component Tests', () => {
                 imports: [ManagementPortalTestModule],
                 declarations: [SourceDataDetailComponent],
                 providers: [
-                    DateUtils,
-                    DataUtils,
+                    JhiDateUtils,
+                    JhiDataUtils,
                     DatePipe,
                     {
                         provide: ActivatedRoute,
                         useValue: new MockActivatedRoute({sourceDataName: 'testSourceData'})
                     },
                     SourceDataService,
-                    EventManager
+                    JhiEventManager
                 ]
             }).overrideTemplate(SourceDataDetailComponent, '').compileComponents();
         }));
@@ -45,7 +45,7 @@ describe('Component Tests', () => {
             it('Should call load all on init', () => {
             // GIVEN
 
-            spyOn(service, 'find').and.returnValue(Observable.of(new SourceData(10)));
+            spyOn(service, 'find').and.returnValue(observableOf(new SourceData(10)));
 
             // WHEN
             comp.ngOnInit();

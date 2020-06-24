@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EventManager, JhiLanguageService } from 'ng-jhipster';
-import { Subscription } from 'rxjs/Rx';
+import { JhiEventManager } from 'ng-jhipster';
+import { Subscription } from 'rxjs';
 import { Role } from '../../admin/user-management/role.model';
 
 import { RoleService } from './role.service';
@@ -17,13 +17,10 @@ export class RoleDetailComponent implements OnInit, OnDestroy {
     private eventSubscriber: Subscription;
 
     constructor(
-            private eventManager: EventManager,
-            private jhiLanguageService: JhiLanguageService,
+            private eventManager: JhiEventManager,
             private roleService: RoleService,
             private route: ActivatedRoute,
-    ) {
-        this.jhiLanguageService.setLocations(['role']);
-    }
+    ) {}
 
     ngOnInit() {
         this.subscription = this.route.params.subscribe((params) => {

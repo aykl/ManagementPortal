@@ -1,6 +1,7 @@
+
+import {throwError as observableThrowError, of as observableOf} from 'rxjs';
 import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { Renderer, ElementRef } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { ElementRef } from '@angular/core';
 import { ManagementPortalTestModule } from '../../../../test.module';
 import { PasswordResetInitComponent } from '../../../../../../../main/webapp/app/account/password-reset/init/password-reset-init.component';
 import { PasswordResetInit } from '../../../../../../../main/webapp/app/account/password-reset/init/password-reset-init.service';
@@ -10,6 +11,9 @@ describe('Component Tests', () => {
     describe('PasswordResetInitComponent', function() {
         let fixture: ComponentFixture<PasswordResetInitComponent>;
         let comp: PasswordResetInitComponent;
+        const emailRef: ElementRef = {
+            nativeElement: jasmine.createSpyObj('Element', ['focus'])
+        };
 
         beforeEach(() => {
             fixture = TestBed.configureTestingModule({
@@ -18,18 +22,13 @@ describe('Component Tests', () => {
                 providers: [
                     PasswordResetInit,
                     {
-                        provide: Renderer,
-                        useValue: {
-                            invokeElementMethod(renderElement: any, methodName: string, args?: any[]) {}
-                        }
-                    },
-                    {
                         provide: ElementRef,
                         useValue: new ElementRef(null)
                     }
                 ]
             }).overrideTemplate(PasswordResetInitComponent, '').createComponent(PasswordResetInitComponent);
             comp = fixture.componentInstance;
+            comp.emailRef = emailRef;
             comp.ngOnInit();
         });
 
@@ -41,26 +40,21 @@ describe('Component Tests', () => {
         });
 
         it('sets focus after the view has been initialized',
-            inject([ElementRef], (elementRef: ElementRef) => {
-                const element = fixture.nativeElement;
-                const node = {
-                    focus() {}
+            inject([], () => {
+                const localEmailRef: ElementRef = {
+                    nativeElement: jasmine.createSpyObj('Element', ['focus'])
                 };
-
-                elementRef.nativeElement = element;
-                spyOn(element, 'querySelector').and.returnValue(node);
-                spyOn(node, 'focus');
+                comp.emailRef = localEmailRef;
 
                 comp.ngAfterViewInit();
 
-                expect(element.querySelector).toHaveBeenCalledWith('#email');
-                expect(node.focus).toHaveBeenCalled();
+                expect(localEmailRef.nativeElement.focus).toHaveBeenCalled();
             })
         );
 
         it('notifies of success upon successful requestReset',
             inject([PasswordResetInit], (service: PasswordResetInit) => {
-                spyOn(service, 'save').and.returnValue(Observable.of({}));
+                spyOn(service, 'save').and.returnValue(observableOf({}));
                 comp.resetAccount.email = 'user@domain.com';
 
                 comp.requestReset();
@@ -74,7 +68,7 @@ describe('Component Tests', () => {
 
         it('notifies of unknown email upon email address not registered/400',
             inject([PasswordResetInit], (service: PasswordResetInit) => {
-                spyOn(service, 'save').and.returnValue(Observable.throw({
+                spyOn(service, 'save').and.returnValue(observableThrowError({
                     status: 400,
                     data: 'email address not registered'
                 }));
@@ -91,7 +85,7 @@ describe('Component Tests', () => {
 
         it('notifies of error upon error response',
             inject([PasswordResetInit], (service: PasswordResetInit) => {
-                spyOn(service, 'save').and.returnValue(Observable.throw({
+                spyOn(service, 'save').and.returnValue(observableThrowError({
                     status: 503,
                     data: 'something else'
                 }));

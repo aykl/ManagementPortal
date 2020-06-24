@@ -1,6 +1,7 @@
+
+import {throwError as observableThrowError, of as observableOf,  Observable } from 'rxjs';
 import { TestBed, async, tick, fakeAsync, inject } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
 import { ManagementPortalTestModule } from '../../../test.module';
 import { MockActivatedRoute } from '../../../helpers/mock-route.service';
 import { LoginModalService } from '../../../../../../main/webapp/app/shared';
@@ -39,7 +40,7 @@ describe('Component Tests', () => {
         it('calls activate.get with the key from params',
             inject([Activate],
                 fakeAsync((service: Activate) => {
-                    spyOn(service, 'get').and.returnValue(Observable.of());
+                    spyOn(service, 'get').and.returnValue(observableOf());
 
                     comp.ngOnInit();
                     tick();
@@ -52,7 +53,7 @@ describe('Component Tests', () => {
         it('should set set success to OK upon successful activation',
             inject([Activate],
                 fakeAsync((service: Activate) => {
-                    spyOn(service, 'get').and.returnValue(Observable.of({}));
+                    spyOn(service, 'get').and.returnValue(observableOf({}));
 
                     comp.ngOnInit();
                     tick();
@@ -66,7 +67,7 @@ describe('Component Tests', () => {
         it('should set set error to ERROR upon activation failure',
             inject([Activate],
                 fakeAsync((service: Activate) => {
-                    spyOn(service, 'get').and.returnValue(Observable.throw('ERROR'));
+                    spyOn(service, 'get').and.returnValue(observableThrowError('ERROR'));
 
                     comp.ngOnInit();
                     tick();

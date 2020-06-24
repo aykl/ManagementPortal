@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService, EventManager, JhiLanguageService, ParseLinks } from 'ng-jhipster';
-import { Subscription } from 'rxjs/Rx';
+import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
+import { Subscription } from 'rxjs';
 import { ITEMS_PER_PAGE } from '../../shared';
 
 import { Revision } from './revision.model';
@@ -30,12 +30,11 @@ export class RevisionComponent implements OnInit, OnDestroy {
     routeData: any;
 
     constructor(
-            private jhiLanguageService: JhiLanguageService,
             private revisionService: RevisionService,
-            private parseLinks: ParseLinks,
-            private alertService: AlertService,
+            private parseLinks: JhiParseLinks,
+            private alertService: JhiAlertService,
             private activatedRoute: ActivatedRoute,
-            private eventManager: EventManager,
+            private eventManager: JhiEventManager,
             private router: Router,
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -45,7 +44,6 @@ export class RevisionComponent implements OnInit, OnDestroy {
             this.reverse = data['pagingParams'].ascending;
             this.predicate = data['pagingParams'].predicate;
         });
-        this.jhiLanguageService.setLocations(['audits']);
     }
 
     ngOnInit() {

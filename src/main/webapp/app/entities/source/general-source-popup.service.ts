@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Source } from '../../shared/source/source.model';

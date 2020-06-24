@@ -1,6 +1,7 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { DateUtils } from 'ng-jhipster';
-import { Observable } from 'rxjs/Rx';
+import { JhiDateUtils } from 'ng-jhipster';
+import { Observable } from 'rxjs';
 import { Project } from './project.model';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { SourceType } from '../../entities/source-type';
@@ -11,8 +12,10 @@ export class ProjectService {
 
     private resourceUrl = 'api/projects';
 
-    constructor(private http: HttpClient, private dateUtils: DateUtils) {
-    }
+    constructor(
+            private http: HttpClient,
+            private dateUtils: JhiDateUtils
+    ) {}
 
     create(project: Project): Observable<Project> {
         const copy: Project = Object.assign({}, project);
@@ -31,14 +34,14 @@ export class ProjectService {
     }
 
     find(projectName: string): Observable<Project> {
-        return this.http.get(`${this.resourceUrl}/${encodeURIComponent(projectName)}`)
-                .map((jsonResponse: any) => {
+        return this.http.get(`${this.resourceUrl}/${encodeURIComponent(projectName)}`).pipe(
+                map((jsonResponse: any) => {
                     jsonResponse.startDate = this.dateUtils
                     .convertDateTimeFromServer(jsonResponse.startDate);
                     jsonResponse.endDate = this.dateUtils
                     .convertDateTimeFromServer(jsonResponse.endDate);
                     return jsonResponse;
-                });
+                }));
     }
 
     query(req?: any): Observable<HttpResponse<Project[]>> {
@@ -47,8 +50,8 @@ export class ProjectService {
     }
 
     findAll(fetchMinimal: boolean): Observable<any> {
-        return this.http.get(`${this.resourceUrl}?minimized=${fetchMinimal}`)
-        .map((res: any) => this.convertResponseDates(res));
+        return this.http.get(`${this.resourceUrl}?minimized=${fetchMinimal}`).pipe(
+        map((res: any) => this.convertResponseDates(res)));
     }
 
     findSourceTypesByName(projectName: string): Observable<SourceType[]> {

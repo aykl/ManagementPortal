@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
-import { AlertService, EventManager, JhiLanguageService, ParseLinks } from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
 import { ITEMS_PER_PAGE, Project, User, UserService } from '..';
 
@@ -24,14 +24,12 @@ export class CommonUserMgmtComponent implements OnInit, OnChanges {
     @Input() authority: String;
 
     constructor(
-            private jhiLanguageService: JhiLanguageService,
             private userService: UserService,
-            private parseLinks: ParseLinks,
-            private alertService: AlertService,
-            private eventManager: EventManager,
+            private parseLinks: JhiParseLinks,
+            private alertService: JhiAlertService,
+            private eventManager: JhiEventManager,
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
-        this.jhiLanguageService.addLocation('user-management');
     }
 
     ngOnInit() {

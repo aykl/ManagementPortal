@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EventManager, JhiLanguageService } from 'ng-jhipster';
-import { Subscription } from 'rxjs/Rx';
+import { JhiEventManager, JhiLanguageService } from 'ng-jhipster';
+import { Subscription } from 'rxjs';
 
 import { SourceType } from './source-type.model';
 import { SourceTypeService } from './source-type.service';
@@ -17,13 +17,11 @@ export class SourceTypeDetailComponent implements OnInit, OnDestroy {
     private eventSubscriber: Subscription;
 
     constructor(
-            private eventManager: EventManager,
+            private eventManager: JhiEventManager,
             private jhiLanguageService: JhiLanguageService,
             private sourceTypeService: SourceTypeService,
             private route: ActivatedRoute,
-    ) {
-        this.jhiLanguageService.setLocations(['sourceType', 'sourceTypeScope']);
-    }
+    ) {}
 
     ngOnInit() {
         this.subscription = this.route.params.subscribe((params) => {

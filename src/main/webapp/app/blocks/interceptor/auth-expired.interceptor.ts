@@ -1,20 +1,21 @@
+import { tap } from 'rxjs/operators';
 import { Injector } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import {
-    HttpHandler,
-    HttpRequest,
-    HttpInterceptor,
+    HttpErrorResponse,
     HttpEvent,
-    HttpErrorResponse
+    HttpHandler,
+    HttpInterceptor,
+    HttpRequest,
 } from '@angular/common/http';
-import {AuthServerProvider, AuthService, Principal} from '../../shared';
+import { AuthServerProvider, AuthService, Principal } from '../../shared';
 
 export class AuthExpiredInterceptor implements HttpInterceptor {
 
     constructor(private injector: Injector) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(request).do((event: HttpEvent<any>) => {}, (err: any) => {
+        return next.handle(request).pipe(tap((event: HttpEvent<any>) => {}, (err: any) => {
             if (err instanceof HttpErrorResponse) {
                 const principal: Principal = this.injector.get(Principal);
 
@@ -26,6 +27,6 @@ export class AuthExpiredInterceptor implements HttpInterceptor {
                     authServerProvider.logout();
                 }
             }
-        });
+        }));
     }
 }

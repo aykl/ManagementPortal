@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import {
-    LangChangeEvent,
-    TranslateService,
-    TranslationChangeEvent,
-} from 'ng2-translate/ng2-translate';
 
 import { LANGUAGES } from './language.constants';
+import { LangChangeEvent, TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 
 @Injectable()
 export class JhiLanguageHelper {
 
-    constructor(private translateService: TranslateService, private titleService: Title, private router: Router) {
+    constructor(
+            private translateService: TranslateService,
+            private titleService: Title,
+            private router: Router) {
         this.init();
     }
 

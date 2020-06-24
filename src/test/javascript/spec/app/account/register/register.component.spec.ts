@@ -1,6 +1,7 @@
+
+import {throwError as observableThrowError, of as observableOf} from 'rxjs';
 import { ComponentFixture, TestBed, async, inject, tick, fakeAsync } from '@angular/core/testing';
-import { Renderer, ElementRef } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { ElementRef } from '@angular/core';
 import { JhiLanguageService } from 'ng-jhipster';
 import { MockLanguageService } from '../../../helpers/mock-language.service';
 import { ManagementPortalTestModule } from '../../../test.module';
@@ -9,10 +10,12 @@ import { Register } from '../../../../../../main/webapp/app/account/register/reg
 import { RegisterComponent } from '../../../../../../main/webapp/app/account/register/register.component';
 
 describe('Component Tests', () => {
-
     describe('RegisterComponent', () => {
         let fixture: ComponentFixture<RegisterComponent>;
         let comp: RegisterComponent;
+        const loginRef: ElementRef = {
+            nativeElement: jasmine.createSpyObj('Element', ['focus'])
+        };
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -22,10 +25,6 @@ describe('Component Tests', () => {
                     Register,
                     {
                         provide: LoginModalService,
-                        useValue: null
-                    },
-                    {
-                        provide: Renderer,
                         useValue: null
                     },
                     {
@@ -39,6 +38,7 @@ describe('Component Tests', () => {
         beforeEach(() => {
             fixture = TestBed.createComponent(RegisterComponent);
             comp = fixture.componentInstance;
+            comp.loginRef = loginRef;
             comp.ngOnInit();
         });
 
@@ -54,7 +54,7 @@ describe('Component Tests', () => {
         it('should update success to OK after creating an account',
             inject([Register, JhiLanguageService],
                 fakeAsync((service: Register, mockTranslate: MockLanguageService) => {
-                    spyOn(service, 'save').and.returnValue(Observable.of({}));
+                    spyOn(service, 'save').and.returnValue(observableOf({}));
                     comp.registerAccount.password = comp.confirmPassword = 'password';
 
                     comp.register();
@@ -75,9 +75,9 @@ describe('Component Tests', () => {
         );
 
         it('should notify of user existence upon 400/login already in use',
-            inject([Register],
+            inject([Register, JhiLanguageService],
                 fakeAsync((service: Register) => {
-                    spyOn(service, 'save').and.returnValue(Observable.throw({
+                    spyOn(service, 'save').and.returnValue(observableThrowError({
                         status: 400,
                         _body: 'login already in use'
                     }));
@@ -94,9 +94,9 @@ describe('Component Tests', () => {
         );
 
         it('should notify of email existence upon 400/email address already in use',
-            inject([Register],
+            inject([Register, JhiLanguageService],
                 fakeAsync((service: Register) => {
-                    spyOn(service, 'save').and.returnValue(Observable.throw({
+                    spyOn(service, 'save').and.returnValue(observableThrowError({
                         status: 400,
                         _body: 'email address already in use'
                     }));
@@ -113,9 +113,9 @@ describe('Component Tests', () => {
         );
 
         it('should notify of generic error',
-            inject([Register],
+            inject([Register, JhiLanguageService],
                 fakeAsync((service: Register) => {
-                    spyOn(service, 'save').and.returnValue(Observable.throw({
+                    spyOn(service, 'save').and.returnValue(observableThrowError({
                         status: 503
                     }));
                     comp.registerAccount.password = comp.confirmPassword = 'password';

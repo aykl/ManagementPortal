@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { EventManager, JhiLanguageService } from 'ng-jhipster';
+import { JhiEventManager, JhiLanguageService } from 'ng-jhipster';
 import { OAuthClientPopupService } from './oauth-client-popup.service';
 
 import { OAuthClient } from './oauth-client.model';
@@ -21,10 +21,8 @@ export class OAuthClientDeleteDialogComponent implements OnInit {
             private jhiLanguageService: JhiLanguageService,
             private oauthClientService: OAuthClientService,
             public activeModal: NgbActiveModal,
-            private eventManager: EventManager,
-    ) {
-        this.jhiLanguageService.addLocation('oauthClient');
-    }
+            private eventManager: JhiEventManager,
+    ) {}
 
     ngOnInit() {
         this.protectedClient = this.client.additionalInformation['protected'] === 'true';

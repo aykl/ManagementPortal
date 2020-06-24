@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { EventManager, JhiLanguageService } from 'ng-jhipster';
+import { JhiEventManager } from 'ng-jhipster';
 
 import { Account, LoginModalService, Principal, Project, UserService } from '../shared';
 
@@ -18,14 +18,11 @@ export class HomeComponent implements OnInit {
     projects: Project[];
 
     constructor(
-            private jhiLanguageService: JhiLanguageService,
             private principal: Principal,
             private loginModalService: LoginModalService,
-            private eventManager: EventManager,
+            private eventManager: JhiEventManager,
             private userService: UserService,
-    ) {
-        this.jhiLanguageService.setLocations(['home']);
-    }
+    ) {}
 
     ngOnInit() {
         this.loadRelevantProjects();

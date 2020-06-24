@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { EventManager, JhiLanguageService } from 'ng-jhipster';
+import { JhiEventManager } from 'ng-jhipster';
 import { SourcePopupService } from './source-popup.service';
 
 import { Source } from './source.model';
@@ -17,13 +17,10 @@ export class SourceDeleteDialogComponent {
     source: Source;
 
     constructor(
-            private jhiLanguageService: JhiLanguageService,
             private sourceService: SourceService,
             public activeModal: NgbActiveModal,
-            private eventManager: EventManager,
-    ) {
-        this.jhiLanguageService.addLocation('source');
-    }
+            private eventManager: JhiEventManager,
+    ) {}
 
     clear() {
         this.activeModal.dismiss('cancel');

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { EventManager, JhiLanguageService } from 'ng-jhipster';
+import { JhiEventManager } from 'ng-jhipster';
 import { SubjectPopupService } from './subject-popup.service';
 
 import { Subject } from './subject.model';
@@ -18,13 +18,10 @@ export class SubjectDeleteDialogComponent {
     isDelete: boolean;
 
     constructor(
-            private jhiLanguageService: JhiLanguageService,
             private subjectService: SubjectService,
             public activeModal: NgbActiveModal,
-            private eventManager: EventManager,
-    ) {
-        this.jhiLanguageService.addLocation('subject');
-    }
+            private eventManager: JhiEventManager,
+    ) {}
 
     clear() {
         this.activeModal.dismiss('cancel');

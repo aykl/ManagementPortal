@@ -1,6 +1,6 @@
-import {Injector, NgModule} from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {Ng2Webstorage} from 'ngx-webstorage';
+import { Ng2Webstorage } from 'ngx-webstorage';
 import { ManagementPortalAccountModule } from './account/account.module';
 import { ManagementPortalAdminModule } from './admin/admin.module';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
@@ -20,12 +20,12 @@ import {
 
 import { ManagementPortalSharedModule, UserRouteAccessService } from './shared';
 import './vendor.ts';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {AuthInterceptor} from './blocks/interceptor/auth.interceptor';
-import {AuthExpiredInterceptor} from './blocks/interceptor/auth-expired.interceptor';
-import {ErrorHandlerInterceptor} from './blocks/interceptor/errorhandler.interceptor';
-import {EventManager} from 'ng-jhipster';
-import {NotificationInterceptor} from './blocks/interceptor/notification.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './blocks/interceptor/auth.interceptor';
+import { AuthExpiredInterceptor } from './blocks/interceptor/auth-expired.interceptor';
+import { ErrorHandlerInterceptor } from './blocks/interceptor/errorhandler.interceptor';
+import { JhiEventManager } from 'ng-jhipster';
+import { NotificationInterceptor } from './blocks/interceptor/notification.interceptor';
 
 @NgModule({
     imports: [
@@ -71,7 +71,7 @@ import {NotificationInterceptor} from './blocks/interceptor/notification.interce
             useClass: ErrorHandlerInterceptor,
             multi: true,
             deps: [
-                EventManager
+                JhiEventManager
             ]
         },
         {

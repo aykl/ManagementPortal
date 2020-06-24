@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { AlertService, EventManager, JhiLanguageService } from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
 import { Project, ProjectService } from '../../shared/project';
 import { SourceDataService } from '../source-data';
 import { SourceTypePopupService } from './source-type-popup.service';
@@ -25,15 +25,12 @@ export class SourceTypeDialogComponent implements OnInit {
 
     constructor(
             public activeModal: NgbActiveModal,
-            private jhiLanguageService: JhiLanguageService,
-            private alertService: AlertService,
+            private alertService: JhiAlertService,
             private sourceTypeService: SourceTypeService,
             private sourceDataService: SourceDataService,
             private projectService: ProjectService,
-            private eventManager: EventManager,
+            private eventManager: JhiEventManager,
     ) {
-        this.jhiLanguageService.addLocation('sourceType');
-        this.jhiLanguageService.addLocation('sourceTypeScope');
         this.isSaving = false;
         this.authorities = ['ROLE_USER', 'ROLE_SYS_ADMIN'];
     }

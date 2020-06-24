@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService, EventManager, JhiLanguageService, ParseLinks } from 'ng-jhipster';
-import { Subscription } from 'rxjs/Rx';
+import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
+import { Subscription } from 'rxjs';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
 
 import { SourceType } from './source-type.model';
@@ -28,12 +28,11 @@ export class SourceTypeComponent implements OnInit, OnDestroy {
     previousPage: any;
 
     constructor(
-            private jhiLanguageService: JhiLanguageService,
             private sourceTypeService: SourceTypeService,
-            private alertService: AlertService,
-            private eventManager: EventManager,
+            private alertService: JhiAlertService,
+            private eventManager: JhiEventManager,
             private principal: Principal,
-            private parseLinks: ParseLinks,
+            private parseLinks: JhiParseLinks,
             private activatedRoute: ActivatedRoute,
             private router: Router,
     ) {
@@ -45,7 +44,6 @@ export class SourceTypeComponent implements OnInit, OnDestroy {
             this.reverse = data['pagingParams'].ascending;
             this.predicate = data['pagingParams'].predicate;
         });
-        this.jhiLanguageService.setLocations(['sourceType', 'sourceTypeScope']);
     }
 
     loadAll() {

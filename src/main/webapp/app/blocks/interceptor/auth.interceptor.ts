@@ -1,7 +1,7 @@
-import {Injector} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {AuthServerProvider, TokenData} from '../../shared';
+import { Injector } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { AuthServerProvider, TokenData } from '../../shared';
 
 export class AuthInterceptor implements HttpInterceptor {
 

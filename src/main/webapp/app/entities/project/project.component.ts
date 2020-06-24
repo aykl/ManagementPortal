@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
-import { AlertService, EventManager, JhiLanguageService, ParseLinks } from 'ng-jhipster';
+import { Subscription } from 'rxjs';
+import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { ITEMS_PER_PAGE, Principal, Project, ProjectService } from '../../shared';
-import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
     selector: 'jhi-project',
@@ -24,12 +24,11 @@ export class ProjectComponent implements OnInit, OnDestroy {
     previousPage: any;
 
     constructor(
-            private jhiLanguageService: JhiLanguageService,
             private projectService: ProjectService,
-            private alertService: AlertService,
-            private eventManager: EventManager,
+            private alertService: JhiAlertService,
+            private eventManager: JhiEventManager,
             private principal: Principal,
-            private parseLinks: ParseLinks,
+            private parseLinks: JhiParseLinks,
             private activatedRoute: ActivatedRoute,
             private router: Router,
     ) {
@@ -41,7 +40,6 @@ export class ProjectComponent implements OnInit, OnDestroy {
             this.reverse = data['pagingParams'].ascending;
             this.predicate = data['pagingParams'].predicate;
         });
-        this.jhiLanguageService.setLocations(['project', 'projectStatus']);
     }
 
     loadAll() {

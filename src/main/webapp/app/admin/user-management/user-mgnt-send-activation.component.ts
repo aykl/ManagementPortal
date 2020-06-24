@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { EventManager, JhiLanguageService } from 'ng-jhipster';
+import { JhiEventManager } from 'ng-jhipster';
 
 import { User, UserService } from '../../shared';
 import { UserModalService } from './user-modal.service';
@@ -15,13 +15,10 @@ export class UserSendActivationLinkDialogComponent {
     user: User;
 
     constructor(
-            private jhiLanguageService: JhiLanguageService,
             private userService: UserService,
             public activeModal: NgbActiveModal,
-            private eventManager: EventManager,
-    ) {
-        this.jhiLanguageService.addLocation('user-management');
-    }
+            private eventManager: JhiEventManager,
+    ) {}
 
     clear() {
         this.activeModal.dismiss('cancel');

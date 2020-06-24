@@ -1,4 +1,4 @@
-import {SourceType} from '../../entities/source-type';
+import { SourceType } from '../../entities/source-type';
 
 export const enum ProjectStatus {
     'PLANNING',

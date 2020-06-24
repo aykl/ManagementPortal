@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
-import { ParseLinks } from 'ng-jhipster';
+import { JhiParseLinks } from 'ng-jhipster';
 import { ManagementPortalTestModule } from '../../../test.module';
 import { AuditsComponent } from '../../../../../../main/webapp/app/admin/audits/audits.component';
 import { AuditsService } from '../../../../../../main/webapp/app/admin/audits/audits.service';
@@ -44,7 +44,7 @@ describe('Component Tests', () => {
                 providers: [
                     AuditsService,
                     NgbPaginationConfig,
-                    ParseLinks
+                    JhiParseLinks
                 ]
             })
             .overrideTemplate(AuditsComponent, '')

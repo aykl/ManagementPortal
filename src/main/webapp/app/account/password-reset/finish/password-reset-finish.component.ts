@@ -1,7 +1,6 @@
-import { AfterViewInit, Component, ElementRef, OnInit, Renderer } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiLanguageService } from 'ng-jhipster';
 import { LoginModalService } from '../../../shared';
 
 import { PasswordResetFinish } from './password-reset-finish.service';
@@ -19,16 +18,13 @@ export class PasswordResetFinishComponent implements OnInit, AfterViewInit {
     success: string;
     modalRef: NgbModalRef;
     key: string;
+    @ViewChild('passwordRef', {read: ElementRef}) passwordRef: ElementRef;
 
     constructor(
-            private jhiLanguageService: JhiLanguageService,
             private passwordResetFinish: PasswordResetFinish,
             private loginModalService: LoginModalService,
             private route: ActivatedRoute,
-            private elementRef: ElementRef, private renderer: Renderer,
-    ) {
-        this.jhiLanguageService.setLocations(['reset']);
-    }
+    ) {}
 
     ngOnInit() {
         this.route.queryParams.subscribe((params) => {
@@ -39,9 +35,7 @@ export class PasswordResetFinishComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        if (this.elementRef.nativeElement.querySelector('#password') !== null) {
-            this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#password'), 'focus', []);
-        }
+        this.passwordRef.nativeElement.focus();
     }
 
     finishReset() {

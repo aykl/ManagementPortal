@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 import { Subject } from './subject.model';
 import { HttpClient, HttpResponse } from '@angular/common/http';

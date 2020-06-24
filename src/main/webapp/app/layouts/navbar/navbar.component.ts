@@ -1,11 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { EventManager, JhiLanguageService } from 'ng-jhipster';
-import { Subscription } from 'rxjs/Subscription';
+import { JhiEventManager, JhiLanguageService } from 'ng-jhipster';
+import { Subscription } from 'rxjs';
 
 import { DEBUG_INFO_ENABLED, VERSION } from '../../app.constants';
-import { JhiLanguageHelper, LoginModalService, LoginService, Principal, Project, UserService } from '../../shared';
+import {
+    JhiLanguageHelper,
+    LoginModalService,
+    LoginService,
+    Principal,
+    Project,
+    UserService,
+} from '../../shared';
 
 import { ProfileService } from '../profiles/profile.service';
 
@@ -37,12 +44,11 @@ export class NavbarComponent implements OnInit {
             private loginModalService: LoginModalService,
             private profileService: ProfileService,
             private router: Router,
-            private eventManager: EventManager,
+            private eventManager: JhiEventManager,
             private userService: UserService,
     ) {
         this.version = DEBUG_INFO_ENABLED ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
-        this.languageService.addLocation('home');
     }
 
     ngOnInit() {

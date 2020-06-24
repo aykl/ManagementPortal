@@ -7,7 +7,7 @@ import {
     Routes,
 } from '@angular/router';
 
-import { PaginationUtil } from 'ng-jhipster';
+import { JhiPaginationUtil } from 'ng-jhipster';
 
 import { Principal } from '../../shared';
 import { UserDeleteDialogComponent } from './user-management-delete-dialog.component';
@@ -16,7 +16,7 @@ import { UserDialogComponent } from './user-management-dialog.component';
 
 import { UserMgmtComponent } from './user-management.component';
 import { UserSendActivationLinkComponent } from './user-mgnt-send-activation.component';
-import { SYSTEM_ADMIN} from '../../shared/constants/common.constants';
+import { SYSTEM_ADMIN } from '../../shared/constants/common.constants';
 
 @Injectable()
 export class UserResolve implements CanActivate {
@@ -33,8 +33,9 @@ export class UserResolve implements CanActivate {
 @Injectable()
 export class UserResolvePagingParams implements Resolve<any> {
 
-    constructor(private paginationUtil: PaginationUtil) {
-    }
+    constructor(
+            private paginationUtil: JhiPaginationUtil,
+    ) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const page = route.queryParams['page'] ? route.queryParams['page'] : '1';

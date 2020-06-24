@@ -1,7 +1,6 @@
 import { NgModule, Sanitizer } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { AlertService } from 'ng-jhipster';
-import { TranslateService } from 'ng2-translate';
+import { JhiAlertService, JhiConfigService } from 'ng-jhipster';
 import {
     FindLanguageFromKeyPipe,
     JhiAlertComponent,
@@ -9,11 +8,14 @@ import {
     JhiLanguageHelper,
     ManagementPortalSharedLibsModule,
 } from './';
+import { TranslateService } from '@ngx-translate/core';
 
-export function alertServiceProvider(sanitizer: Sanitizer, translateService: TranslateService) {
+export function alertServiceProvider(
+        sanitizer: Sanitizer,
+        configService: JhiConfigService,
+        translateService: TranslateService) {
     // set below to true to make alerts look like toast
-    const isToast = false;
-    return new AlertService(sanitizer, isToast, translateService);
+    return new JhiAlertService(sanitizer, configService, translateService);
 }
 
 @NgModule({
@@ -28,9 +30,9 @@ export function alertServiceProvider(sanitizer: Sanitizer, translateService: Tra
     providers: [
         JhiLanguageHelper,
         {
-            provide: AlertService,
+            provide: JhiAlertService,
             useFactory: alertServiceProvider,
-            deps: [Sanitizer, TranslateService],
+            deps: [Sanitizer, JhiConfigService, TranslateService],
         },
         Title,
     ],

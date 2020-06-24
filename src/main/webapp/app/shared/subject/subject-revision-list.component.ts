@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { JhiLanguageService, ParseLinks } from 'ng-jhipster';
+import { JhiParseLinks } from 'ng-jhipster';
 import { ITEMS_PER_PAGE } from '..';
 import { EntityRevision } from '../../entities/revision/entity-revision.model';
 import { SubjectService } from './subject.service';
@@ -26,10 +26,9 @@ export class SubjectRevisionListComponent implements OnInit, OnDestroy {
     private subscription: any;
 
     constructor(
-            private jhiLanguageService: JhiLanguageService,
             private subjectService: SubjectService,
             private route: ActivatedRoute,
-            private parseLinks: ParseLinks,
+            private parseLinks: JhiParseLinks,
             private router: Router,
     ) {
         this.revisions = [];
@@ -47,8 +46,6 @@ export class SubjectRevisionListComponent implements OnInit, OnDestroy {
                 this.reverse = true;
             }
         });
-        this.jhiLanguageService.addLocation('subject');
-        this.jhiLanguageService.addLocation('audits');
     }
 
     ngOnInit() {

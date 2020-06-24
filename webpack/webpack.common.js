@@ -3,6 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StringReplacePlugin = require('string-replace-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const MergeJsonWebpackPlugin = require("merge-jsons-webpack-plugin");
 const path = require('path');
 
 module.exports = function (options) {
@@ -25,7 +26,7 @@ module.exports = function (options) {
                 { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports-loader?jQuery=jquery' },
                 {
                     test: /\.ts$/,
-                    loaders: [
+                    loader: [
                         'angular2-template-loader',
                         'awesome-typescript-loader'
                     ],
@@ -45,25 +46,25 @@ module.exports = function (options) {
                 },
                 {
                     test: /\.scss$/,
-                    loaders: ['to-string-loader', 'css-loader', 'sass-loader'],
+                    loader: ['to-string-loader', 'css-loader', 'sass-loader'],
                     exclude: /(vendor\.scss|global\.scss)/
                 },
                 {
                     test: /(vendor\.scss|global\.scss)/,
-                    loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+                    loader: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
                 },
                 {
                     test: /\.css$/,
-                    loaders: ['to-string-loader', 'css-loader'],
+                    loader: ['to-string-loader', 'css-loader'],
                     exclude: /(vendor\.css|global\.css)/
                 },
                 {
                     test: /(vendor\.css|global\.css)/,
-                    loaders: ['style-loader', 'css-loader']
+                    loader: ['style-loader', 'css-loader']
                 },
                 {
                     test: /\.(jpe?g|png|gif|svg|woff2?|ttf|eot)$/i,
-                    loaders: ['file-loader?hash=sha512&digest=hex&name=[hash].[ext]']
+                    loader: ['file-loader?hash=sha512&digest=hex&name=[hash].[ext]']
                 },
                 {
                     test: /app.constants.ts$/,
@@ -94,6 +95,15 @@ module.exports = function (options) {
             new webpack.ProvidePlugin({
                 $: "jquery",
                 jQuery: "jquery"
+            }),
+            new MergeJsonWebpackPlugin({
+                output: {
+                    groupBy: [
+                        { pattern: "./src/main/webapp/i18n/en/*.json", fileName: "./i18n/en.json" },
+                        { pattern: "./src/main/webapp/i18n/nl/*.json", fileName: "./i18n/nl.json" }
+                        // jhipster-needle-i18n-language-webpack - JHipster will add/remove languages in this array
+                    ]
+                }
             }),
             new HtmlWebpackPlugin({
                 template: './src/main/webapp/index.html',
