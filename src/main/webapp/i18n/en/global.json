@@ -101,8 +101,8 @@
             "error" : {
                 "alreadyExist" : "This attribute key already exist in the list"
             }
-
-        }
+        },
+        "item-count": "Showing {{first}} - {{second}} of {{total}} items."
     },
     "entity": {
         "action": {

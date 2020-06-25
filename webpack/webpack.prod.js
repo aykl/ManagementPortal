@@ -2,7 +2,6 @@ const commonConfig = require('./webpack.common.js');
 const webpackMerge = require('webpack-merge');
 const plugin = require("base-href-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const Visualizer = require('webpack-visualizer-plugin');
 const path = require('path');
 const ENV = 'prod';
 
@@ -18,11 +17,6 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
         new MiniCssExtractPlugin({
             filename: '[hash].styles.css'
         }),
-        new Visualizer({
-            // Webpack statistics in target folder
-            filename: '../stats.html'
-        }),
         new plugin.BaseHrefWebpackPlugin({ baseHref: '/managementportal/' })
-
     ]
 });

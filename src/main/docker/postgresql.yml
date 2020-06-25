@@ -1,8 +1,8 @@
 version: '2'
 services:
     managementportal-postgresql:
-        image: postgres:9.6.2
+        image: bitnami/postgresql:12
         environment:
-            - POSTGRES_USER=radarcns
-            - POSTGRES_PASSWORD=radarcns
-            - POSTGRES_DB=managementportal
+            - POSTGRESQL_USERNAME=radarcns
+            - POSTGRESQL_PASSWORD=radarcns
+            - POSTGRESQL_DATABASE=managementportal

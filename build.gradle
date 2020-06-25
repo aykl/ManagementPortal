@@ -49,7 +49,6 @@ configurations {
     compile.exclude module: "spring-boot-starter-tomcat"
 }
 
-
 bootRepackage {
     mainClass = 'org.radarcns.management.ManagementPortalApp'
 }
@@ -102,7 +101,6 @@ task testReport(type: TestReport) {
 apply from: 'gradle/liquibase.gradle'
 apply from: 'gradle/gatling.gradle'
 apply from: 'gradle/mapstruct.gradle'
-apply from: 'gradle/docker.gradle'
 apply from: 'gradle/style.gradle'
 apply from: 'gradle/openapi.gradle'
 

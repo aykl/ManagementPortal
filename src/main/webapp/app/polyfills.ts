@@ -1,3 +1,2 @@
-/* tslint:disable */
-import 'reflect-metadata/Reflect';
-import 'zone.js/dist/zone';
+import 'core-js/proposals/reflect-metadata';
+import 'zone.js/dist/zone';  // Included with Angular CLI.

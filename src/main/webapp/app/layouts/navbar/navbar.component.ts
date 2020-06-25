@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiLanguageService } from 'ng-jhipster';
@@ -23,15 +23,16 @@ import { ProfileService } from '../profiles/profile.service';
         'navbar.scss',
     ],
 })
-export class NavbarComponent implements OnInit {
-
+export class NavbarComponent implements OnInit, OnDestroy {
     inProduction: boolean;
     isNavbarCollapsed: boolean;
     languages: any[];
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
-    eventSubscriber: Subscription;
+    userEventSubscriber: Subscription;
+    projectEventSubscriber: Subscription;
+    authenticationEventSubscriber: Subscription;
 
     projects: Project[];
     currentAccount: any;
@@ -53,11 +54,11 @@ export class NavbarComponent implements OnInit {
 
     ngOnInit() {
         this.registerChangeInAuthentication();
-        this.languageHelper.getAll().then((languages) => {
+        this.languageHelper.getAll().then(languages => {
             this.languages = languages;
         });
 
-        this.profileService.getProfileInfo().then((profileInfo) => {
+        this.profileService.getProfileInfo().then(profileInfo => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
@@ -65,10 +66,14 @@ export class NavbarComponent implements OnInit {
         this.registerChangeInUsers();
     }
 
+    ngOnDestroy() {
+        this.eventManager.destroy(this.userEventSubscriber);
+        this.eventManager.destroy(this.projectEventSubscriber);
+        this.eventManager.destroy(this.authenticationEventSubscriber);
+    }
+
     registerChangeInAuthentication() {
-        this.eventManager.subscribe('authenticationSuccess', () => {
-            this.loadRelevantProjects();
-        });
+        this.authenticationEventSubscriber = this.eventManager.subscribe('authenticationSuccess', () => this.loadRelevantProjects());
     }
 
     loadRelevantProjects() {
@@ -83,7 +88,8 @@ export class NavbarComponent implements OnInit {
     }
 
     registerChangeInUsers() {
-        this.eventSubscriber = this.eventManager.subscribe('userListModification', () => this.loadRelevantProjects());
+        this.userEventSubscriber = this.eventManager.subscribe('userListModification', () => this.loadRelevantProjects());
+        this.projectEventSubscriber = this.eventManager.subscribe('projectListModification', () => this.loadRelevantProjects());
     }
 
     trackProjectName(index: number, item: Project) {

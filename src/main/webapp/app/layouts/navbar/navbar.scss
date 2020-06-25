@@ -16,7 +16,9 @@ Navbar
         width: 40px;
         border-radius: 50%;
     }
-    .dropdown-item.active, .dropdown-item.active:focus, .dropdown-item.active:hover {
+    .dropdown-item.active,
+    .dropdown-item.active:focus,
+    .dropdown-item.active:hover {
         background-color: #353d47;
     }
     .dropdown-toggle::after {
@@ -32,7 +34,7 @@ Navbar
         font-weight: 400;
     }
     .jh-navbar-toggler {
-        color: #ccc;
+        color: #cccccc;
         font-size: 1.5em;
         padding: 10px;
         &:hover {
