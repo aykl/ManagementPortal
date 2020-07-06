@@ -178,7 +178,7 @@ username your OAuth client id, and leaving the password empty:
     ```json
     {
        "access_token": "...",
-       "refresh_token": "...",
+       "refresh_token": "..."
     }
     ```
     Now the app can use the refresh token flow as shown above.

@@ -19,9 +19,6 @@ then
   yarn webdriver-manager update
   yarn e2e:prod # run e2e tests against production mode
   docker-compose -f src/main/docker/app.yml down -v # clean up containers and volumes
-  git checkout src/test/javascript/protractor.conf.js
-  git checkout webpack/webpack.prod.js
-  git checkout src/main/resources/config/application-prod.yml
 else
   echo "Skipping production e2e tests"
 fi

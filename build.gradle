@@ -62,7 +62,7 @@ springBoot {
 if (OperatingSystem.current().isWindows()) {
     task pathingJar(type: Jar) {
         dependsOn configurations.runtime
-        appendix = 'pathing'
+        archiveAppendix.set('pathing')
 
         doFirst {
             manifest {
